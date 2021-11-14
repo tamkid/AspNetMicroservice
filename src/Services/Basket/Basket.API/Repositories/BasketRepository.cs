@@ -1,6 +1,7 @@
 ﻿using Basket.API.Entities;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
+using System;
 using System.Threading.Tasks;
 
 namespace Basket.API.Repositories
@@ -11,7 +12,7 @@ namespace Basket.API.Repositories
 
         public BasketRepository(IDistributedCache redis)
         {
-            _redis = redis;
+            _redis = redis ?? throw new ArgumentNullException(nameof(redis));
         }
 
         public async Task<ShoppingCart> GetBasket(string userName)
