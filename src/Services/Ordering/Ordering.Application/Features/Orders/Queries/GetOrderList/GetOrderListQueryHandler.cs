@@ -19,11 +19,11 @@ namespace Ordering.Application.Features.Orders.Queries.GetOrderList
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<List<OrderVm>> Handle(GetOrderListQuery request, CancellationToken cancellationToken)
+        public async Task<List<OrderVm>> Handle(GetOrderListQuery request, 
+                                                CancellationToken cancellationToken)
         {
             var lstOrder = await _orderRepository.GetOrdersByUserName(request.UserName);
-            var lstOrderVm = _mapper.Map<List<OrderVm>>(lstOrder);
-            return lstOrderVm;
+            return _mapper.Map<List<OrderVm>>(lstOrder);
         }
     }
 }
