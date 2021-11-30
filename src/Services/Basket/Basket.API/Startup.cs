@@ -29,6 +29,9 @@ namespace Basket.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Auto mapper
+            services.AddAutoMapper(typeof(Startup));
+
             // Config Redis
             services.AddStackExchangeRedisCache(options =>
             {
@@ -46,7 +49,7 @@ namespace Basket.API
             {
                 config.UsingRabbitMq((ctx, cfg) =>
                 {
-                    cfg.Host("amqp://guest:guest@localhost:5672");
+                    cfg.Host(Configuration["EventBusSettings:HostAddress"]);
                 });
             });
             services.AddMassTransitHostedService();

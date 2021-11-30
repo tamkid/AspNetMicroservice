@@ -30,6 +30,9 @@ namespace Ordering.API
             services.AddApplicationServices();
             services.AddInfrastructureServices(Configuration);
 
+            //// Config RabbitMQ + MassTransit
+            //services.AddMassTransit
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
